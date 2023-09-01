@@ -1,8 +1,19 @@
 #include <iostream>
 
-int main(void)
-    {
-        using namespace std;
-        cout << "hello world";
-        return 0;
-    }
+int * global;
+
+void test(int * a)
+{
+    global = new int();
+    global = a;
+    std::cout << *global;
+}
+
+int main()
+{
+    int * a = new int();
+    *a = 10;
+    test(a);
+    delete a;
+    return 0;
+}
