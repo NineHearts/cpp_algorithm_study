@@ -53,7 +53,7 @@ void Lock::show_lock()
     for (int i = 0; i < number_length; i++)
         std::cout << number[i];
     std::cout << std::endl;
-    // std::cout << "time : " << time_lapse << std::endl;
+    std::cout << "time : " << time_lapse << std::endl;
 }
 
 void Lock::solve()
@@ -68,7 +68,7 @@ void Lock::solve()
     // }
     // while (data[0] != -1);
 
-    for (int i = 0; i < 6; i++)
+    do
     {
         std::cout << "==========================" << std::endl;
         std::cout << "before turn dial : ";
@@ -78,8 +78,8 @@ void Lock::solve()
         turn_dial(data);
         std::cout << "==========================" << std::endl;
     }
-
-    
+    while (data[0] != -1);
+    show_lock();
 
 }
 
@@ -166,14 +166,15 @@ void Lock::turn_dial(int *data)
         for (int i = data[1]; i < number_length; i++)
         {
             if (temp == -1)
-                temp = i;
+                temp = i+1;
             else
-                if (number[i] == temp)
+                std::cout << "num[i] : " << number[i] << "\tnum[temp] : " << number[temp] << std::endl;
+                if (number[i] == number[temp])
                     temp = i;
                     std::cout << "temp : " << temp << std::endl;
         }
 
-        for (int i = data[1]; i <= temp; i++)
+        for (int i = data[1]; i < temp; i++)
         {
             number[i + 1] += data[0];    // reverse 배열은 뒤의 번호를 앞의 번호에 맞춰야 함으로 +1 한 배열의 값을 바꿈
             number[i + 1] %= range_m;
@@ -188,7 +189,8 @@ void Lock::turn_dial(int *data)
             if (temp == -1)
                 temp = i;
             else
-                if (number[i] == temp)
+                std::cout << "num[i] : " << number[i] << "\tnum[temp] : " << number[temp] << std::endl;
+                if (number[i] == number[temp])
                     temp = i;
                     std::cout << "temp : " << temp << std::endl;
         }
