@@ -80,6 +80,7 @@ void Lock::solve()
     }
     while (data[0] != -1);
     show_lock();
+    
 
 }
 
