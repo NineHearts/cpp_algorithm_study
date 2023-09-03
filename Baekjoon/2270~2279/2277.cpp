@@ -39,19 +39,21 @@ void Lock::init_lock(std::string n, std::string num)
 
     using std::cout;
 
-    cout << "count of dials : " << dial_n << std::endl;
-    cout << "range of dial number : " << range_m << std::endl;
-    cout << "setup number : ";
-    for (int i = 0; i < number_length; i++)
-        cout << number[i];
-    cout << std::endl;
+    // cout << "count of dials : " << dial_n << std::endl;
+    // cout << "range of dial number : " << range_m << std::endl;
+    // cout << "setup number : ";
+    // for (int i = 0; i < number_length; i++)
+    //     cout << number[i];
+    // cout << std::endl;
 }
 
 void Lock::show_lock()
 {
+    std::cout<< "dial number is : ";
     for (int i = 0; i < number_length; i++)
         std::cout << number[i];
     std::cout << std::endl;
+    // std::cout << "time : " << time_lapse << std::endl;
 }
 
 void Lock::solve()
@@ -66,11 +68,15 @@ void Lock::solve()
     // }
     // while (data[0] != -1);
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 6; i++)
     {
+        std::cout << "==========================" << std::endl;
+        std::cout << "before turn dial : ";
+        show_lock();
         get_correction();
         data = get_data();
         turn_dial(data);
+        std::cout << "==========================" << std::endl;
     }
 
     
@@ -111,40 +117,36 @@ void Lock::get_correction() // 각 자릿수에서 인접한 다이얼과의 차
 
 int *Lock::get_data()
 {
-    int * data = new int[3];    // [0] : min value, [1] : index of min value, [2] : where the min value is(0 : forward, 1 : reverse)
-    int min;
-    int index, type;
-    int temp = range_m + 1;     // 어떤 숫자가 나오던 1 더 높은 숫자로 설정
-
+    int * data = new int[3];    // [0]:min value, [1]:index of min value, [2]:where the min value is(0 : forward, 1 : reverse)
+    int min = range_m + 1;      // 어떤 숫자가 나오던 1 더 높은 숫자로 설정
+    int index, type;   
     for (int i = 0; i < number_length - 1; i++)
-    {
-        if (temp != 0)
+{
+        if (forward[i] != 0)
         {
-            if (temp > forward[i])
+            if (min > forward[i])
             {
-                temp = forward[i];
+                min = forward[i];
                 index = i;
                 type = 0;
-            }
+            }    
         }
     }
     
     for (int i = 0; i < number_length - 1; i++)
     {
-        if (temp != 0)
+        if (reverse[i] != 0)
         {
-            if (temp > reverse[i])
+            if (min > reverse[i])
             {
-                temp = reverse[i];
+                min = reverse[i];
                 index = i;
                 type = 1;
             }
         }
     }
     
-    if (min != range_m + 1)
-        min = temp;
-    else
+    if (min == range_m + 1)
         min = -1;
 
     data[0] = min;
@@ -157,20 +159,49 @@ int *Lock::get_data()
 
 void Lock::turn_dial(int *data)
 {
-    if (data[2])    // if type is reverse.
+    int temp = -1;
+    if (data[2])    // if array is reverse.
     {
-        number[data[1] + 1] += data[0];    // reverse 배열은 뒤의 번호를 앞의 번호에 맞춰야 함으로 +1 한 배열의 값을 바꿈
-        number[data[1] + 1] %= range_m;
-        show_lock();
+        std::cout << "reverse dial turn..." << std::endl;
+        for (int i = data[1]; i < number_length; i++)
+        {
+            if (temp == -1)
+                temp = i;
+            else
+                if (number[i] == temp)
+                    temp = i;
+                    std::cout << "temp : " << temp << std::endl;
+        }
+
+        for (int i = data[1]; i <= temp; i++)
+        {
+            number[i + 1] += data[0];    // reverse 배열은 뒤의 번호를 앞의 번호에 맞춰야 함으로 +1 한 배열의 값을 바꿈
+            number[i + 1] %= range_m;
+        }
+
     }
-    else
+    else            // if array is forward
     {
-        number[data[1]] += data[0];
-        number[data[1]] %= range_m;
-        show_lock();
+        std::cout << "forward dial turn..." << std::endl;
+        for (int i = data[1]; i > 0; i--)
+        {
+            if (temp == -1)
+                temp = i;
+            else
+                if (number[i] == temp)
+                    temp = i;
+                    std::cout << "temp : " << temp << std::endl;
+        }
+
+        for (int i = data[1]; i >= temp; i--)
+        {
+            number[i] += data[0];
+            number[i] %= range_m;
+        }
     }
 
     time_lapse += data[0];
+    show_lock();
     delete[] data;
 }
 
