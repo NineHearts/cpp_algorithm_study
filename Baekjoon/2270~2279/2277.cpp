@@ -10,25 +10,30 @@ class Lock
         short dial_n;               // 다이얼의 갯수
         short range_m;              // 다이얼 숫자의 범위
         short *number;              // 현재 다이얼 숫자
-        short *forward, *reverse;   // 앞의 번호를 기준으로 뒤에 번호를 바꿀지, 뒤의 번호를 기준으로 바꿀지 편차값 저장 배열
+        short *forward, *reverse;   // 앞의 번호를 기준으로 뒤에 번호를 바꿀지, 뒤의 번호를 기준으로 바꿀지 결정하기 위한 배열
+                                    // forward : 다이얼 숫자의 0번째 인덱스부터 n-1까지 앞의 다이얼 번호가 다음 다이얼 번호가 되기 위한 값을 저장
+                                    // reverse : 다이얼 숫자의 n-1번째 인덱스부터 0까지 뒤의 다이얼 번호가 앞의 다이얼 번호가 되기 위한 값을 저장
+        short *correction;          // 변화량 최솟값을 기준으로 다이얼 값을 변경하기 전 인접한 다이얼들의 횟수가 낭비되는지 확인용
         short * _history;           // 사용x 바꾼 다이얼 번호 저장용
         short time_lapse;           // 지난 시간 저장
     public:
-        void init_lock(std::string n, std::string num);
+        void init_lock(std::string n, std::string num);     // 클래스 생성 시 변수들 초기화 및 초기 설정
         void show_lock();
         void solve();
         void get_difference();
+        void get_correction();
         int *get_data();
         void turn_dial(int *data);
         ~Lock();
 };
 
+// 데이터가 문자열 형태로 전달되므로 정수형 변환이 필요하다.
 void Lock::init_lock(std::string n, std::string num)
 {
-    dial_n = atoi(n.substr(0, n.find(' ')).c_str());
-    range_m = atoi(n.substr(n.find(' ') + 1, n.length()).c_str());
-    number = new short[dial_n]();
-    forward = new short[num.length() - 1]();
+    dial_n = atoi(n.substr(0, n.find(' ')).c_str());                // 다이얼 갯수의 수
+    range_m = atoi(n.substr(n.find(' ') + 1, n.length()).c_str());  // 다이얼 숫자의 범위
+    number = new short[dial_n]();                                   // 다이얼 숫자
+    forward = new short[num.length() - 1]();                        
     reverse = new short[num.length() - 1]();
     time_lapse = 0;
 
@@ -169,6 +174,11 @@ int *Lock::get_data()
     //std::cout << "min : " << min << "\tindex : " << index << "\ttype : " << type << std::endl;
 
     return data;
+}
+
+void Lock::get_correction(int std_index, int ref_index) 
+// std_index : 값을 변경할 다이얼의 인덱스, ref_index : 다이얼의 비교대상 인덱스
+
 }
 
 void Lock::turn_dial(int *data)
