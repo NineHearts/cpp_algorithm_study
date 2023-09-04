@@ -3,6 +3,7 @@
 #include <algorithm>
 // 10 50
 // 24 1 13 38 47 10 3 25 6 9
+// 29 13 4 2 11 24 26 0 9 10
 class Lock
 {
     private:
@@ -16,7 +17,7 @@ class Lock
         void init_lock(std::string n, std::string num);
         void show_lock();
         void solve();
-        void get_correction();
+        void get_difference();
         int *get_data();
         void turn_dial(int *data);
         ~Lock();
@@ -74,7 +75,7 @@ void Lock::solve()
     
     // do
     // {
-    //     get_correction();
+    //     get_difference();
     //     data = get_data();
     //     turn_dial(data);
     // }
@@ -85,7 +86,7 @@ void Lock::solve()
         std::cout << "==========================" << std::endl;
         //std::cout << "before turn dial : ";
 
-        get_correction();
+        get_difference();
         data = get_data();
         if (data[0] == -1)
             break;
@@ -97,7 +98,7 @@ void Lock::solve()
     
 
 }
-void Lock::get_correction() // 각 자릿수에서 인접한 다이얼과의 차이
+void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차이, 
 {
     int i;
     int temp = 0;
@@ -178,9 +179,6 @@ void Lock::turn_dial(int *data)
         //std::cout << "reverse dial turn..." << std::endl;
         for (int i = data[1]; i < dial_n; i++)
         {
-            int a = number[i];
-            int b = number[temp];
-
             if (temp == -1)
                 temp = i+1;
             else
@@ -189,6 +187,8 @@ void Lock::turn_dial(int *data)
                     temp = i;
                     //std::cout << "temp : " << temp << std::endl;
         }
+
+        
 
         for (int i = data[1]; i < temp; i++)
         {
