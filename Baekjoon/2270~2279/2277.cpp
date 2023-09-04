@@ -178,7 +178,8 @@ int *Lock::get_data()
 
 void Lock::get_correction(int std_index, int ref_index) 
 // std_index : 값을 변경할 다이얼의 인덱스, ref_index : 다이얼의 비교대상 인덱스
-
+{
+    
 }
 
 void Lock::turn_dial(int *data)
