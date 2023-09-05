@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <ctime>
 // 10 50
 // 24 1 13 38 47 10 3 25 6 9
 // 29 13 4 2 11 24 26 0 9 10
@@ -21,9 +22,10 @@ class Lock
         void show_lock();
         void solve();
         void get_difference();
-        void get_correction();
+        void get_correction(int std_index, int ref_index, int dir);
         int *get_data();
-        void turn_dial(int *data);
+        void turn_dial(int *data);      // new solution
+        void turn_dial_(int *data);     // wrong solution
         ~Lock();
 };
 
@@ -78,14 +80,6 @@ void Lock::solve()
 {
     int * data;     // [0] : min value, [1] : index of min value, [2] : where the min value is(0 : forward, 1 : reverse)
     
-    // do
-    // {
-    //     get_difference();
-    //     data = get_data();
-    //     turn_dial(data);
-    // }
-    // while (data[0] != -1);
-
     while (1)
     {
         std::cout << "==========================" << std::endl;
@@ -134,9 +128,26 @@ void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차
     std::cout << std::endl;
 }
 
+void Lock::get_correction(int std_index, int ref_index, int dir) 
+// std_index : 값을 변경할 다이얼의 인덱스, ref_index : 바꿀 다이얼의 비교대상 인덱스
+{
+    int i = 0;
+
+    if (dir)    // reverse
+    {
+
+    }
+    else        // forward
+    {
+
+    }
+
+}
+
 int *Lock::get_data()
 {
-    int * data = new int[3];    // [0]:min value, [1]:index of min value, [2]:where the min value is(0 : forward, 1 : reverse)
+    // [0]:min value, [1]:index of min value, [2]:where the min value is(0 : forward, 1 : reverse)
+    int * data = new int[3];
     int min = range_m + 1;      // 어떤 숫자가 나오던 1 더 높은 숫자로 설정
     int index, type;   
     for (int i = 0; i < dial_n - 1; i++)
@@ -171,37 +182,52 @@ int *Lock::get_data()
     data[0] = min;
     data[1] = index;
     data[2] = type;
-    //std::cout << "min : " << min << "\tindex : " << index << "\ttype : " << type << std::endl;
+    std::cout << "min : " << min << "\tindex : " << index << "\ttype : " << type << std::endl;
 
     return data;
 }
 
-void Lock::get_correction(int std_index, int ref_index) 
-// std_index : 값을 변경할 다이얼의 인덱스, ref_index : 다이얼의 비교대상 인덱스
+void Lock::turn_dial_(int *data)
 {
-    
+    int range = -1;
+    int index = 0;
+    if (data[2])        // if array is reverse.
+    {
+
+    }
+    else            // if array is forward
+    {
+        for (index = data[1]; index; index-- )
+        {
+
+        }
+    }
+
+    time_lapse += data[0];
+    show_lock();
+    delete[] data;
 }
 
 void Lock::turn_dial(int *data)
 {
-    int temp = -1;
+    int range = -1;
     if (data[2])        // if array is reverse.
     {
         //std::cout << "reverse dial turn..." << std::endl;
-        for (int i = data[1]; i < dial_n; i++)
+        for (int i = data[1]; i < dial_n; i++)          // range : 같은 값을 가지는 숫자들의 범위
         {
-            if (temp == -1)
-                temp = i+1;
+            if (range == -1)
+                range = i+1;
             else
                 //std::cout << "num[i] : " << number[i] << "\tnum[temp] : " << number[temp] << std::endl;
-                if (number[i] == number[temp])
-                    temp = i;
+                if (number[i] == number[range])
+                    range = i;
                     //std::cout << "temp : " << temp << std::endl;
         }
 
         
 
-        for (int i = data[1]; i < temp; i++)
+        for (int i = data[1]; i < range; i++)
         {
             number[i + 1] += data[0];    // reverse 배열은 뒤의 번호를 앞의 번호에 맞춰야 함으로 +1 한 배열의 값을 바꿈
             number[i + 1] %= range_m;
@@ -213,16 +239,16 @@ void Lock::turn_dial(int *data)
                     //std::cout << "forward dial turn..." << std::endl;
         for (int i = data[1]; i >= 0; i--)
         {
-            if (temp == -1)
-                temp = i;
+            if (range == -1)
+                range = i;
             else
                 //std::cout << "num[i] : " << number[i] << "\tnum[temp] : " << number[temp] << std::endl;
-                if (number[i] == number[temp])
-                    temp = i;
+                if (number[i] == number[range])
+                    range = i;
                     //std::cout << "temp : " << temp << std::endl;
         }
 
-        for (int i = data[1]; i >= temp; i--)
+        for (int i = data[1]; i >= range; i--)
         {
             number[i] += data[0];
             number[i] %= range_m;
@@ -244,6 +270,8 @@ Lock::~Lock()
 
 int main()
 {
+    clock_t start, finish;
+    double duration;
     using std::cin;
     using std::string;
 
@@ -255,8 +283,13 @@ int main()
     getline(cin, n);
     getline(cin, m);
 
+    start = clock();
     lock.init_lock(n, m);
     lock.solve();
 
+    finish = clock();
+ 
+    duration = (double)(finish - start) / CLOCKS_PER_SEC;
+    std::cout << duration << "초" << std::endl;
     return 0;
 }
