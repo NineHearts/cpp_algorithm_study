@@ -4,6 +4,8 @@
 #include <ctime>
 // 10 50
 // 24 1 13 38 47 10 3 25 6 9
+// 24 1 13 9 47 10 3 25 6 9
+// 10 30
 // 29 13 4 2 11 24 26 0 9 10
 class Lock
 {
@@ -129,11 +131,11 @@ void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차
 }
 
 void Lock::get_correction(int std_index, int ref_index, int dir) 
-// std_index : 값을 변경할 다이얼의 인덱스, ref_index : 바꿀 다이얼의 비교대상 인덱스
+// std_index : 값을 변경할 다이얼의 인덱스, ref_index : 바꿀 다이얼의 비교대상 인덱스, dir : 
 {
     int i = 0;
 
-    if (dir)    // reverse
+    if (i)      // reverse
     {
 
     }
@@ -191,21 +193,36 @@ void Lock::turn_dial_(int *data)
 {
     int range = -1;
     int index = 0;
+    int left, right;
     if (data[2])        // if array is reverse.
     {
 
     }
     else            // if array is forward
     {
-        for (index = data[1]; index >= 0; index--)
+        for (index = data[1]; index >= 0; index--)      // 동일한 다이얼 번호의 data[i] 부터 다이얼 번호의 처음까지 반복하며 같은 숫자를 찾음
         {
-            if (range == -1)        // 동일한 다이얼 번호의 data[i] 부터 범위
+            if (range == -1)                            // 처음 값은 현재의 인덱스로 초기화
                 range = index;
             else
-                if (number[index] == number[range])
+                if (number[index] == number[range])     // 이후 값을 바꿀 다이얼의 값과 인접한 같은 값을 가지는 다이얼의 위치 범위를 저장
                     range = index;
+                else
+                    break;
         }
 
+        for (index = range; index >= 0; index--)
+        {
+            std::cout << "back dial number : " << number[index] << std::endl;
+            if (index != 0)
+            {
+                get_correction();
+            }
+            else
+            {
+                
+            }
+        }
     }
 
     time_lapse += data[0];
@@ -228,9 +245,14 @@ void Lock::turn_dial(int *data)
                 if (number[i] == number[range])
                     range = i;
                     //std::cout << "temp : " << temp << std::endl;
+                else
+                    break;
         }
 
-        
+        for (int i = range; i < dial_n; i++)
+        {
+            std::cout << "back dial number : " << number[i] << std::endl;
+        }
 
         for (int i = data[1]; i < range; i++)
         {
@@ -251,8 +273,13 @@ void Lock::turn_dial(int *data)
                 if (number[i] == number[range])
                     range = i;
                     //std::cout << "temp : " << temp << std::endl;
+                else
+                    break;
         }
-
+        for (int i = range; i >= 0; i--)
+        {
+            std::cout << "back dial number : " << number[i] << std::endl;
+        }
         for (int i = data[1]; i >= range; i--)
         {
             number[i] += data[0];
