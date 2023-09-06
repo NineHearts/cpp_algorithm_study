@@ -197,10 +197,15 @@ void Lock::turn_dial_(int *data)
     }
     else            // if array is forward
     {
-        for (index = data[1]; index; index-- )
+        for (index = data[1]; index >= 0; index--)
         {
-
+            if (range == -1)        // 동일한 다이얼 번호의 data[i] 부터 범위
+                range = index;
+            else
+                if (number[index] == number[range])
+                    range = index;
         }
+
     }
 
     time_lapse += data[0];
