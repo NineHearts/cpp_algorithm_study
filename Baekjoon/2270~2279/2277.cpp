@@ -24,7 +24,7 @@ class Lock
         void show_lock();
         void solve();
         void get_difference();
-        void get_correction(int std_index, int ref_index, int dir);
+        void get_correction(int std_index, int range, int dir);
         int *get_data();
         void turn_dial(int *data);      // new solution
         void turn_dial_(int *data);     // wrong solution
@@ -130,14 +130,15 @@ void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차
     std::cout << std::endl;
 }
 
-void Lock::get_correction(int std_index, int ref_index, int dir) 
+void Lock::get_correction(int std_index, int range, int dir) 
 // std_index : 값을 변경할 다이얼의 인덱스, ref_index : 바꿀 다이얼의 비교대상 인덱스, dir : 
 {
     int i = 0;
+    int largest = 0;
 
     if (i)      // reverse
     {
-
+        
     }
     else        // forward
     {
@@ -214,15 +215,8 @@ void Lock::turn_dial_(int *data)
         for (index = range; index >= 0; index--)
         {
             std::cout << "back dial number : " << number[index] << std::endl;
-            if (index != 0)
-            {
-                get_correction();
-            }
-            else
-            {
-                
-            }
         }
+        get_correction(data[0], range, data[2]);
     }
 
     time_lapse += data[0];
