@@ -113,7 +113,7 @@ void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차
     {
         temp = number[i];
 
-            reverse[i-1] = (number[i-1] >= temp) ? (number[i-1] - temp) : (number[i-1] - temp) + range_m;
+        reverse[i-1] = (number[i-1] >= temp) ? (number[i-1] - temp) : (number[i-1] - temp) + range_m;
 
     }
 
@@ -130,19 +130,26 @@ void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차
     std::cout << std::endl;
 }
 
-void Lock::get_correction(int range, int dir) 
-// std_index : 값을 변경할 다이얼의 인덱스, ref_index : 바꿀 다이얼의 비교대상 인덱스, dir : 
+void Lock::get_correction(int idx, int dir)
+//  range : 차이가 가장 적은 값과 인접한 위치와 동일한 값을 가지는 마지막 다이얼의 위치, dir : 좌에서 우인지, 우에서 좌인지 방향
 {
-    int i = 0;
-    int large_difference = 0;
+    int i = idx;
+    int index = 0; // 가장 차이가 큰 다이얼의 인덱스
+    int value = 0; // 다이얼을 변경할 값
 
     if (dir)      // reverse
     {
-        
+        for (i = idx; i >= 0; i--)
+        {
+            std::cout << "idx? : " << i << " / " << 0 << std::endl;
+        }
     }
     else        // forward
     {
-
+        for (i = (idx + 1); i < dial_n; i++)
+        {
+            std::cout << "idx? : " << i << " / " << dial_n-1 << std::endl;
+        }
     }
 
 }
@@ -247,14 +254,13 @@ void Lock::turn_dial(int *data)
         {
             std::cout << "back dial number : " << number[i] << std::endl;
         }
+        get_correction(range, data[2]);
         std::cout << "range last index number : " << range << "(" << number[range] << ")" << std::endl;
-
         for (int i = data[1]; i < range; i++)
         {
             number[i + 1] += data[0];    // reverse 배열은 뒤의 번호를 앞의 번호에 맞춰야 함으로 +1 한 배열의 값을 바꿈
             number[i + 1] %= range_m;
         }
-
     }
     else            // if array is forward
     {
@@ -275,6 +281,7 @@ void Lock::turn_dial(int *data)
         {
             std::cout << "back dial number : " << number[i] << std::endl;
         }
+        get_correction(range, data[2]);
         std::cout << "range last index number : " << range << "(" << number[range] << ")" << std::endl;
         for (int i = data[1]; i >= range; i--)
         {
