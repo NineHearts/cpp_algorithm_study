@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include <ctime>
 // 10 50
 // 24 1 13 38 47 10 3 25 6 9
 // 24 1 13 9 47 10 3 25 6 9
@@ -112,7 +111,6 @@ void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차
     for (i = dial_n - 1; i > 0; i--) // number의 맨 뒤에서 시작하므로 배열의 크기인 number length 에서 1을 뺴 배열의 마지막 원소 위치를 넣는다.
     {
         temp = number[i];
-
         reverse[i-1] = (number[i-1] >= temp) ? (number[i-1] - temp) : (number[i-1] - temp) + range_m;
 
     }
@@ -131,24 +129,44 @@ void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차
 }
 
 void Lock::get_correction(int idx, int dir)
-//  range : 차이가 가장 적은 값과 인접한 위치와 동일한 값을 가지는 마지막 다이얼의 위치, dir : 좌에서 우인지, 우에서 좌인지 방향
+//  idx : 차이가 가장 적은 값과 인접한 위치와 동일한 값을 가지는 마지막 다이얼의 위치, dir : 좌에서 우인지, 우에서 좌인지 방향
 {
-    int i = idx;
+    int ref = idx;
+    int i = 0;
+    int range = 0;
     int index = 0; // 가장 차이가 큰 다이얼의 인덱스
     int value = 0; // 다이얼을 변경할 값
+    int dif_1 = 0, dif_2 = 0;       // dif_1 data[ref]와 현재 비교할자다이얼 숫자의 차이
 
-    if (dir)      // reverse
+    if (dir)      // reverse * fix it *
     {
-        for (i = idx; i >= 0; i--)
+        for (i = (idx + 1); i < dial_n; i++)
         {
             std::cout << "idx? : " << i << " / " << 0 << std::endl;
+            if (i <= ref-1)
+            {
+                int dif_1 = number[i] - number[ref] > 0 ? number[i] - number[ref] : number[i] - number[ref] + range_m;
+                int dif_2;
+            }
         }
     }
     else        // forward
     {
-        for (i = (idx + 1); i < dial_n; i++)
+        for (i = ref; i >= 0; i--)
         {
             std::cout << "idx? : " << i << " / " << dial_n-1 << std::endl;
+            if (i <= ref-1)
+            {
+                dif_1 = number[i] - number[ref] > 0 ? number[i] - number[ref] : number[i] - number[ref] + range_m;
+                dif_2;
+                if (i == 0){     // 마지막 인덱스, 뒤의 다이얼이 존재하지 않음.
+                    range = i;
+                }
+                else{
+                    dif_2 = number[i] - number[i-1] > 0 ? number[i] - number[i-1] : number[i] - number[i-1] + range_m;
+                }
+                std::cout << "dif_1 : " << dif_1 << "\tdif_2 : " << dif_2 << std::endl;
+            }
         }
     }
 
@@ -305,8 +323,6 @@ Lock::~Lock()
 
 int main()
 {
-    clock_t start, finish;
-    double duration;
     using std::cin;
     using std::string;
 
@@ -318,13 +334,8 @@ int main()
     getline(cin, n);
     getline(cin, m);
 
-    start = clock();
     lock.init_lock(n, m);
     lock.solve();
 
-    finish = clock();
- 
-    duration = (double)(finish - start) / CLOCKS_PER_SEC;
-    std::cout << duration << "초" << std::endl;
     return 0;
 }
