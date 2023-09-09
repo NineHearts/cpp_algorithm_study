@@ -6,6 +6,8 @@
 // 24 1 13 9 47 10 3 25 6 9
 // 10 30
 // 29 13 4 2 11 24 26 0 9 10
+// 20 100
+// 33 27 75 2 82 49 9 81 3 23 28 84 32 21 57 63 0 14 16 29
 class Lock
 {
     private:
@@ -180,7 +182,7 @@ int *Lock::get_data()
     int min = range_m + 1;      // 어떤 숫자가 나오던 1 더 높은 숫자로 설정
     int index, type;   
     for (int i = 0; i < dial_n - 1; i++)
-{
+    {
         if (forward[i] != 0)
         {
             if (min > forward[i])
