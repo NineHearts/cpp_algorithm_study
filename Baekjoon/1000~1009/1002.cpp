@@ -4,9 +4,21 @@
 
 #include <iostream>
 
-int main()
-{
-    
+struct Pos {
+    int x;
+    int y;
+};
+
+int main() {
+    int cycle;
+    Pos jo;
+    Pos ba;
+
+    std::cin >> cycle;
+
+    for (int i = 0; i < cycle; i++){
+        
+    }
 
     return 0;
 }

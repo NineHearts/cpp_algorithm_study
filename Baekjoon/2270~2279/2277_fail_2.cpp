@@ -49,8 +49,12 @@ void Lock::solve(){
         auto max_iter = std::max_element(gap.begin(), gap.end());
         int max_index = std::distance(gap.begin(), max_iter);
         
+        for (int num : gap)
+                std::cout << num << " ";
+        std::cout << std::endl;
+
         while (gap[max_index]){
-            std::cout << "max gap : " << gap[max_index] << "\t index : " << max_index << std::endl;
+            std::cout << "max gap : " << gap[max_index] << "\t index : " << max_index << "\t move : ";
             if (max_index == 0){
                 temp = gap[max_index] - gap[max_index + 1];
                 gap[max_index] -= temp;
@@ -72,10 +76,15 @@ void Lock::solve(){
                     gap.erase(gap.begin() + k);
                 }
             }
-
+            std::cout << temp << std::endl;
             max_iter = std::max_element(gap.begin(), gap.end());
             max_index = std::distance(gap.begin(), max_iter);
+
+            for (int num : gap)
+                std::cout << num << " ";
+            std::cout << std::endl;
         }
+        std::cout << "count ? : " << sum << std::endl;
         if (count > sum || count == -1)
             count = sum;
     }
