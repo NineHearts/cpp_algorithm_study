@@ -4,33 +4,60 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
-struct Pos {
+struct Turret {
     int x;
     int y;
+    int r;
 
-    void init(std::string input);
+    void init(int []);
+    void show();
 };
 
-void Pos::init(std::string input){
+void Turret::init(int data[]) {
+    x = data[0];
+    y = data[1];
+    r = data[2];
+}
 
+void Turret::show() {
+    std::cout << "x : " << x << "\ty : " << y << "\tr : " << r << std::endl;
 }
 
 int main() {
     using std::string;
     
     int cycle;
+    int a[3], b[3];
+
     string in;
-    Pos *jo;
-    Pos *ba;
+    Turret *jo;
+    Turret *ba;
 
     std::cin >> cycle;
-    jo = new Pos[cycle];
-    ba = new Pos[cycle];
+    jo = new Turret[cycle];
+    ba = new Turret[cycle];
 
-    for (int i = 0; i < cycle; i++){
-        getline(std::cin, in);
+    for (int i = 0; i < cycle; i++) {
+        std::getline(std::cin, in);
+        std::istringstream iss(in);
+
+        for (int j = 0; j < 3; j++)
+            iss >> a[j];
+        for (int k = 0; k < 3; k++)
+            iss >> b[k];
+
+        jo[i].init(a); 
+        ba[i].init(b);
+    }
+    
+    for (int i = 0; i < cycle; i++) {
+        jo[i].show();
+        ba[i].show();
     }
 
+    delete[] jo;
+    delete[] ba;
     return 0;
 }
