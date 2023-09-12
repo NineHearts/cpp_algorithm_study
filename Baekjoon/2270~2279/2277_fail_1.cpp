@@ -1,13 +1,12 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-// 10 50
-// 24 1 13 38 47 10 3 25 6 9
-// 24 1 13 9 47 10 3 25 6 9
-// 10 30
-// 29 13 4 2 11 24 26 0 9 10
-// 20 100
-// 33 27 75 2 82 49 9 81 3 23 28 84 32 21 57 63 0 14 16 29
+
+// 첫번째 솔루션
+// 각 자리에서 각각 왼쪽, 오른쪽 숫자에 맞추는데 필요한 시간을 저장한 배열을 만듬
+// 만든 배열에서 가장 시간이 적게 걸리는 숫자부터 차례대로 맞춰나감.
+// 실패!
+
 class Lock
 {
     private:
@@ -42,8 +41,8 @@ void Lock::init_lock(std::string n, std::string num)
     reverse = new short[num.length() - 1]();
     time_lapse = 0;
 
-    int start = 0;
-    int end = num.find(' ');
+    int start = 0;              // 띄어쓰기로 나누어진 다이얼 숫자를 substr로 나누기 위한 시작 위치 변수
+    int end = num.find(' ');    // 띄어쓰기로 나누어진 다이얼 숫자를 substr로 나누기 위한 한 숫자의 끝 위치 변수
 
     for (int i = 0; i < dial_n; i++) 
     {
@@ -60,16 +59,9 @@ void Lock::init_lock(std::string n, std::string num)
     }
 
     show_lock();
-
-    //using std::cout;
-    // cout << "count of dials : " << dial_n << std::endl;
-    // cout << "range of dial number : " << range_m << std::endl;
-    // cout << "setup number : ";
-    // for (int i = 0; i < dial_n; i++)
-    //     cout << number[i];
-    // cout << std::endl;
 }
 
+// 현재 다이얼 돌림판의 숫자를 보기 위한 함수
 void Lock::show_lock()
 {
     std::cout<< "dial number is : ";
@@ -81,7 +73,7 @@ void Lock::show_lock()
 
 void Lock::solve()
 {
-    int * data;     // [0] : min value, [1] : index of min value, [2] : where the min value is(0 : forward, 1 : reverse)
+    int * data;     // 
     
     while (1)
     {
