@@ -5,7 +5,9 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <cmath>
 
+// 터렛의 좌표와 마린의 거리를 저장할 구조체
 struct Turret {
     int x;
     int y;
@@ -25,6 +27,11 @@ void Turret::show() {
     std::cout << "x : " << x << "\ty : " << y << "\tr : " << r << std::endl;
 }
 
+// 두 터렛 사이의 거리를 반환
+double distance(Turret& T1, Turret& T2) {
+    return sqrt(pow(T1.x - T2.x, 2) + pow(T1.y - T2.y, 2));
+}
+
 int main() {
     using std::string;
     
@@ -36,25 +43,46 @@ int main() {
     Turret *ba;
 
     std::cin >> cycle;
-    jo = new Turret[cycle];
-    ba = new Turret[cycle];
+    std::cin.ignore();          // 개행 문자 제거
+
+    jo = new Turret[cycle];     // 케이스의 갯수에 따라 동적 구조체 배열 선언
+    ba = new Turret[cycle];     // 케이스의 갯수에 따라 동적 구조체 배열 선언
 
     for (int i = 0; i < cycle; i++) {
         std::getline(std::cin, in);
-        std::istringstream iss(in);
+        std::istringstream iss(in);     // 띄어쓰기를 제거하기 위한 istringstream
 
         for (int j = 0; j < 3; j++)
             iss >> a[j];
         for (int k = 0; k < 3; k++)
             iss >> b[k];
 
-        jo[i].init(a); 
+        jo[i].init(a);
         ba[i].init(b);
     }
     
     for (int i = 0; i < cycle; i++) {
-        jo[i].show();
-        ba[i].show();
+        double dist = distance(jo[i], ba[i]);
+        if (dist == 0) {                        // 조규현과 백승환의 터렛 위치가 같을 때
+            if (jo[i].r == ba[i].r) {           // 마린의 위치도 서로 같다면 있을 수 있는 위치가 무한대
+                std::cout << -1 << std::endl;
+            }else if (jo[i].r != ba[i].r) {     // r이 다르다면 류재명이 존재할 수 없다.
+                std::cout << 0 << std::endl;
+            }
+        }else {
+            if (dist > jo[i].r + ba[i].r) {     // 서로의 거리가 두 터렛에 류재명 거리의 합보다 크면 존재할 수 없음
+                std::cout << 0 << std::endl;
+            } else if (dist == jo[i].r + ba[i].r) {     // 한점에서 만날 때
+                std::cout << 1 << std::endl;
+            } else if (dist + std::min(jo[i].r, ba[i].r) < std::max(jo[i].r, ba[i].r)) {    // 한 원이 다른 원 안에 있을 경우
+                std::cout << 0 << std::endl;
+            } else if (dist == std::abs(jo[i].r - ba[i].r)) {   // 한 원이 다른 원 안쪽에 있고, 내접할 때
+                std::cout << 1 << std::endl;
+            } else {                                            // 겹치는 경우
+                std::cout << 2 << std::endl;
+            }
+        }
+            
     }
 
     delete[] jo;
