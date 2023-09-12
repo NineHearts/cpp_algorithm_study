@@ -63,13 +63,16 @@ int main() {
     
     for (int i = 0; i < cycle; i++) {
         double dist = distance(jo[i], ba[i]);
+
         if (dist == 0) {                        // 조규현과 백승환의 터렛 위치가 같을 때
+
             if (jo[i].r == ba[i].r) {           // 마린의 위치도 서로 같다면 있을 수 있는 위치가 무한대
                 std::cout << -1 << std::endl;
-            }else if (jo[i].r != ba[i].r) {     // r이 다르다면 류재명이 존재할 수 없다.
+            } else if (jo[i].r != ba[i].r) {     // r이 다르다면 류재명이 존재할 수 없다.
                 std::cout << 0 << std::endl;
             }
-        }else {
+        } else {
+            
             if (dist > jo[i].r + ba[i].r) {     // 서로의 거리가 두 터렛에 류재명 거리의 합보다 크면 존재할 수 없음
                 std::cout << 0 << std::endl;
             } else if (dist == jo[i].r + ba[i].r) {     // 한점에서 만날 때
