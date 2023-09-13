@@ -27,6 +27,34 @@
 
 #include <iostream>
 
+int fibonacci(int n, int num);
+void get_count(int n);
+
+int main() {
+
+    using std::cin;
+
+    int n;
+    int *num;
+    
+    cin >> n;
+    cin.ignore();
+
+    num = new int[n];
+
+    for (int i = 0; i < n; ++i){
+        cin >> num[i];
+        cin.ignore();
+    }
+
+    for (int i = 0; i < n; ++i){
+        std::cout << fibonacci(num[i], 0) << std::endl;
+    }
+
+    delete[] num;
+    return 0;
+}
+
 void get_count(int n) {
     using std::cout;
     int zero;
@@ -55,25 +83,4 @@ int fibonacci(int n, int num) {
         pre = sum;
     }
     return sum;
-}
-
-int main() {
-
-    using std::cin;
-
-    int n;
-    int *num;
-    
-    cin >> n;
-    cin.ignore();
-
-    num = new int[n];
-
-    for (int i = 0; i < n; ++i){
-        cin >> num[i];
-        cin.ignore();
-    }
-
-    delete[] num;
-    return 0;
 }
