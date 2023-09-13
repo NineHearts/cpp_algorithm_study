@@ -27,6 +27,5 @@ int fibonacci(int n) {
 
 int main() {
 
-    fibonacci(3);
     return 0;
 }
