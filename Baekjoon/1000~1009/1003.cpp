@@ -11,8 +11,6 @@
 // 1은 2번 출력되고, 0은 1번 출력된다. N이 주어졌을 때, 
 // fibonacci(N)을 호출했을 때, 0과 1이 각각 몇 번 출력되는지 구하는 프로그램을 작성하시오.
 
-// #include <stdio.h>
-
 // int fibonacci(int n) {
 //     if (n == 0) {
 //         printf("0");
@@ -26,6 +24,15 @@
 // }
 
 #include <iostream>
+
+// 피보나치 함수를 재귀 호출하여
+// 결과적으로 0을 출력하는 횟수는 
+// fibonacci(0)과 fibonacci(1)일때를 제외하고는
+// 피보나치 수열의 n-2번째 수와 같고,
+// 1을 출력하는 횟수는
+// 피보나치 수열의 n-1번째 수와 같으므로
+// fibonacci(0), fibonacci(1)일때는 각각 정해진 수를,
+// 나머지는 피보나치 수열의 값을 계산해 반환한다.
 
 int fibonacci(int n, int num);
 void get_count(int n);
