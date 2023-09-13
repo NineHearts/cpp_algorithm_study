@@ -11,29 +11,69 @@
 // 1은 2번 출력되고, 0은 1번 출력된다. N이 주어졌을 때, 
 // fibonacci(N)을 호출했을 때, 0과 1이 각각 몇 번 출력되는지 구하는 프로그램을 작성하시오.
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int fibonacci(int n) {
-    if (n == 0) {
-        printf("0");
-        return 0;
-    } else if (n == 1) {
-        printf("1");
-        return 1;
-    } else {
-        return fibonacci(n - 1) + fibonacci(n - 2);
-    }
-}
-
-/*
-    피보나치 함수에 매개 변수로 n을 넣으면 fibonacci(n - 1) + fibonacci(n - 2) 을 호출한다.
-    각각의 fibonacci(n - 1) 함수는 fibonacci(n - 2), fibonacci(n - 3)을,
-    fibonacci(n - 2)는 fibonacci(n - 3), fibonacci(n - 4)를,
-*/
+// int fibonacci(int n) {
+//     if (n == 0) {
+//         printf("0");
+//         return 0;
+//     } else if (n == 1) {
+//         printf("1");
+//         return 1;
+//     } else {
+//         return fibonacci(n - 1) + fibonacci(n - 2);
+//     }
+// }
 
 #include <iostream>
 
+void get_count(int n) {
+    using std::cout;
+    int zero;
+    int one;
+
+    if (n == 0) {
+        zero = 1;
+        one = 0;
+    }else if (n == 1) {
+        zero = 0;
+        one = 1;
+    }else {
+        zero = fibonacci(n, 0);
+        one = fibonacci(n, 1);
+    }
+    
+    cout << zero << " " << one << std::endl;
+}
+
+int fibonacci(int n, int num) {
+
+    int sum = 1;
+    int pre = 0;
+    for (int i = 0; i < n; ++i) {
+        sum += pre;
+        pre = sum;
+    }
+    return sum;
+}
+
 int main() {
-    fibonacci(6);
+
+    using std::cin;
+
+    int n;
+    int *num;
+    
+    cin >> n;
+    cin.ignore();
+
+    num = new int[n];
+
+    for (int i = 0; i < n; ++i){
+        cin >> num[i];
+        cin.ignore();
+    }
+
+    delete[] num;
     return 0;
 }
