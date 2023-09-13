@@ -48,7 +48,7 @@ int main() {
     }
 
     for (int i = 0; i < n; ++i){
-        std::cout << fibonacci(num[i], 0) << std::endl;
+        get_count(num[i]);
     }
 
     delete[] num;
@@ -60,6 +60,8 @@ void get_count(int n) {
     int zero;
     int one;
 
+        zero = fibonacci(n, 0);
+        one = fibonacci(n, 1);
     if (n == 0) {
         zero = 1;
         one = 0;
@@ -77,10 +79,13 @@ void get_count(int n) {
 int fibonacci(int n, int num) {
 
     int sum = 1;
-    int pre = 0;
-    for (int i = 0; i < n; ++i) {
-        sum += pre;
-        pre = sum;
+    int pre_1 = 0;
+    int pre_2 = 0;
+    int i = num != 0 ? 1 : 2;
+    for (; i < n; ++i) {
+        pre_1 = sum;
+        sum += pre_2;
+        pre_2 = pre_1;
     }
     return sum;
 }
