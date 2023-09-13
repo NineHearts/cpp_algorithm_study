@@ -8,7 +8,8 @@
 //     첫 번째 호출한 fibonacci(1)은 1을 출력하고, 1을 리턴한다.
 //     fibonacci(3)은 fibonacci(2)와 fibonacci(1)의 결과를 얻고, 2를 리턴한다.
 
-// 1은 2번 출력되고, 0은 1번 출력된다. N이 주어졌을 때, fibonacci(N)을 호출했을 때, 0과 1이 각각 몇 번 출력되는지 구하는 프로그램을 작성하시오.
+// 1은 2번 출력되고, 0은 1번 출력된다. N이 주어졌을 때, 
+// fibonacci(N)을 호출했을 때, 0과 1이 각각 몇 번 출력되는지 구하는 프로그램을 작성하시오.
 
 #include <stdio.h>
 
@@ -23,9 +24,16 @@ int fibonacci(int n) {
         return fibonacci(n - 1) + fibonacci(n - 2);
     }
 }
+
+/*
+    피보나치 함수에 매개 변수로 n을 넣으면 fibonacci(n - 1) + fibonacci(n - 2) 을 호출한다.
+    각각의 fibonacci(n - 1) 함수는 fibonacci(n - 2), fibonacci(n - 3)을,
+    fibonacci(n - 2)는 fibonacci(n - 3), fibonacci(n - 4)를,
+*/
+
 #include <iostream>
 
 int main() {
-
+    fibonacci(6);
     return 0;
 }
