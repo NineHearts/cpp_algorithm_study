@@ -23,8 +23,6 @@
 //     }
 // }
 
-#include <iostream>
-
 // 피보나치 함수를 재귀 호출하여
 // 결과적으로 0을 출력하는 횟수는 
 // fibonacci(0)과 fibonacci(1)일때를 제외하고는
@@ -34,8 +32,11 @@
 // fibonacci(0), fibonacci(1)일때는 각각 정해진 수를,
 // 나머지는 피보나치 수열의 값을 계산해 반환한다.
 
-int fibonacci(int n, int num);
-void get_count(int n);
+
+#include <iostream>
+
+int fibonacci(int n, int num);  // num은 0이 호출되는 횟수인지 1이 호출되는 횟수인지 구분
+void get_count(int n);          // 숫자를 넣으면 0, 1일때를 제외하고 피보나치 함수를 호출해서 값 print
 
 int main() {
 
