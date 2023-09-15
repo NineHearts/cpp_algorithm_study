@@ -6,7 +6,23 @@
 
 #include <iostream>
 
+class Milky_Way {
+    private:
+        
+
+};
+
 int main() {
-    
+
+    int case_num;
+    int planetary;
+    std::cin >> case_num;
+    std::cin.ignore();
+
+    for (int i = 0; i < case_num; i++) {
+        std::cin >> planetary;
+        std::cin.ignore();
+    }
+
     return 0;
 }
