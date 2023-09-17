@@ -8,6 +8,7 @@
 
 class Milky_Way {
     private:
+        Planet *planet;
 
 };
 
