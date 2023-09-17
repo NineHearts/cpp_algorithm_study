@@ -8,9 +8,16 @@
 
 class Milky_Way {
     private:
-        
 
 };
+
+struct Planet
+{
+    int x;
+    int y;
+    int r;
+};
+
 
 int main() {
 
