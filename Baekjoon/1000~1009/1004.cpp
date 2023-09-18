@@ -13,7 +13,7 @@ class Milky_Way {
         Point start;
     public:
         void solve();
-        void init();
+        void set_planet();
         ~Milky_Way();
 };
 
@@ -39,12 +39,14 @@ int main() {
 
     int case_num;
     int planet_count;
+    Milky_Way milky_way;
+
     std::cin >> case_num;
     std::cin.ignore();
-
     for (int i = 0; i < case_num; i++) {
         
     }
+
     std::cin >> planet_count;
     std::cin.ignore();
     for (int i = 0; i < case_num; i++) {
