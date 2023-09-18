@@ -9,6 +9,9 @@
 class Milky_Way {
     private:
         Planet *planet;
+        Point goal;
+        Point start;
+        
 
 };
 
@@ -17,6 +20,12 @@ struct Planet
     int x;
     int y;
     int r;
+};
+
+struct Point
+{
+    int x;
+    int y;
 };
 
 
