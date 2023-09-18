@@ -11,9 +11,15 @@ class Milky_Way {
         Planet *planet;
         Point goal;
         Point start;
-        
-
+    public:
+        void solve();
+        void init();
+        ~Milky_Way();
 };
+
+Milky_Way::~Milky_Way() {
+    delete[] planet;
+}
 
 struct Planet
 {
