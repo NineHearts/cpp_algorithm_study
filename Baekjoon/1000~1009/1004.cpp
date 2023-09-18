@@ -38,13 +38,17 @@ struct Point
 int main() {
 
     int case_num;
-    int planetary;
+    int planet_count;
     std::cin >> case_num;
     std::cin.ignore();
 
     for (int i = 0; i < case_num; i++) {
-        std::cin >> planetary;
-        std::cin.ignore();
+        
+    }
+    std::cin >> planet_count;
+    std::cin.ignore();
+    for (int i = 0; i < case_num; i++) {
+        
     }
 
     return 0;
