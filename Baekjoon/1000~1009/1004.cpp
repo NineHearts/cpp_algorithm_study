@@ -14,6 +14,7 @@ class Milky_Way {
     public:
         void solve();
         void set_planet();
+        void init();
         ~Milky_Way();
 };
 
