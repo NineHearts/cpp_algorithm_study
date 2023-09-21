@@ -29,13 +29,14 @@ class Milky_Way {
         void solve();
         void set_planet();
         void set_point(std::string nums);
+        void show();
         ~Milky_Way();
 };
 
 void Milky_Way::solve() {
 
 }
-void Milky_Way::set_planet() {
+void Milky_Way::set_planet(std::string nums) {
 
 }
 void Milky_Way::set_point(std::string nums) {
@@ -66,6 +67,12 @@ void Milky_Way::set_point(std::string nums) {
         }
     }
 }
+void Milky_Way::show() {
+    using std::cout;
+
+    cout << start.x << " " << start.y << std::endl;
+    cout << goal.x << " " << goal.y << std::endl;
+}
 
 Milky_Way::~Milky_Way() {
     if (planet) {
@@ -87,7 +94,7 @@ int main() {
 
     for (int i = 0; i < case_num; i++) {
         getline(std::cin, input);
-        milky_way[i];
+        milky_way[i].set_point(input);
 
         std::cin >> planet_count;
         std::cin.ignore();
@@ -96,11 +103,5 @@ int main() {
             getline(std::cin, input);
         }
     }
-
-    std::cout << input << std::endl;
-
-
-    std::cout << input << std::endl;
-
     return 0;
 }
