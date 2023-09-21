@@ -29,15 +29,34 @@ class Milky_Way {
         Point start;
     public:
         void solve();
+        void init();
+        void show() const;
         void set_planet_count(int n);
         void set_planet(std::string nums);
         void set_point(std::string nums);
-        void show();
         ~Milky_Way();
 };
 
 void Milky_Way::solve() {
+    for (int i = 0; i < planet_count; ++i) {
+        planet[i];
+    }
+}
 
+void Milky_Way::init() {
+    std::string input;
+    getline(std::cin, input);
+    set_point(input);
+
+    std::cin >> planet_count;
+    std::cin.ignore();
+
+    set_planet_count(planet_count);
+
+    for (int j = 0; j < planet_count; j++) {
+        getline(std::cin, input);
+        set_planet(input);
+    }
 }
 
 void Milky_Way::set_planet_count(int n) {
@@ -62,7 +81,7 @@ void Milky_Way::set_point(std::string nums) {
     iss >> start.x >> start.y >> goal.x >> goal.y;
 }
 
-void Milky_Way::show() {
+void Milky_Way::show() const{
     using std::cout;
 
     cout << "----------start point----------\n"; 
@@ -85,31 +104,19 @@ int main() {
 
     int case_num;
     int planet_count;
-    std::string input;
-    Milky_Way *milky_way;
+    
+    Milky_Way *milky_ways;
 
     std::cin >> case_num;
     std::cin.ignore();
 
-    milky_way = new Milky_Way[case_num];
+    milky_ways = new Milky_Way[case_num];
 
     for (int i = 0; i < case_num; i++) {
-        getline(std::cin, input);
-        milky_way[i].set_point(input);
-
-        std::cin >> planet_count;
-        std::cin.ignore();
-
-        milky_way[i].set_planet_count(planet_count);
-
-        for (int j = 0; j < planet_count; j++) {
-            getline(std::cin, input);
-            milky_way[i].set_planet(input);
-        }
+        milky_ways[i].init();
+        milky_ways[i].show();
     }
 
-    milky_way[0].show();
-
-    delete[] milky_way;
+    delete[] milky_ways;
     return 0;
 }
