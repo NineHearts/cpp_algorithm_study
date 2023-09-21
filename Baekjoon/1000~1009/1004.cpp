@@ -12,7 +12,7 @@ struct Planet
 {
     int x;
     int y;
-    int r;
+    int r = -1;
 };
 
 struct Point
@@ -47,7 +47,13 @@ void Milky_Way::set_planet_count(int n) {
 
 
 void Milky_Way::set_planet(std::string nums) {
-    for 
+    for (int i = 0; i < planet_count; ++i) {
+        if (planet[i].r == -1) {
+            std::istringstream iss(nums);
+            iss >> planet[i].x >> planet[i].y >> planet[i].r;
+            break;
+        }
+    }
 }
 
 void Milky_Way::set_point(std::string nums) {
@@ -59,8 +65,14 @@ void Milky_Way::set_point(std::string nums) {
 void Milky_Way::show() {
     using std::cout;
 
+    cout << "----------start point----------\n"; 
     cout << start.x << " " << start.y << std::endl;
     cout << goal.x << " " << goal.y << std::endl;
+
+    cout << "----------planets----------\n";
+    for (int i = 0; i < planet_count; ++i) {
+        cout << planet[i].x << " " << planet[i].y << " " << planet[i].r << std::endl;
+    }
 }
 
 Milky_Way::~Milky_Way() {
@@ -90,11 +102,14 @@ int main() {
 
         milky_way[i].set_planet_count(planet_count);
 
-        for (int i = 0; i < planet_count; i++) {
+        for (int j = 0; j < planet_count; j++) {
             getline(std::cin, input);
             milky_way[i].set_planet(input);
         }
     }
+
+    milky_way[0].show();
+
     delete[] milky_way;
     return 0;
 }
