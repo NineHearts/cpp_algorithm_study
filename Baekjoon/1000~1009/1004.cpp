@@ -5,22 +5,7 @@
 */
 
 #include <iostream>
-
-class Milky_Way {
-    private:
-        Planet *planet;
-        Point goal;
-        Point start;
-    public:
-        void solve();
-        void set_planet();
-        void init();
-        ~Milky_Way();
-};
-
-Milky_Way::~Milky_Way() {
-    delete[] planet;
-}
+#include <string>
 
 struct Planet
 {
@@ -35,24 +20,87 @@ struct Point
     int y;
 };
 
+class Milky_Way {
+    private:
+        Planet *planet = nullptr;
+        Point goal;
+        Point start;
+    public:
+        void solve();
+        void set_planet();
+        void set_point(std::string nums);
+        ~Milky_Way();
+};
+
+void Milky_Way::solve() {
+
+}
+void Milky_Way::set_planet() {
+
+}
+void Milky_Way::set_point(std::string nums) {
+    int index = 0;
+    int end = nums.find(' ');
+
+    for (int i = 0; i < 4; i++){
+        switch (i)
+        {
+        case 0:
+            start.x = atoi(nums.substr(index, end - index).c_str());
+            index = end + 1;
+            end = nums.find(' ', index);
+            break;
+        case 1:
+            start.y = atoi(nums.substr(index, end - index).c_str());
+            index = end + 1;
+            end = nums.find(' ', index);
+            break;
+        case 2:
+            goal.x = atoi(nums.substr(index, end - index).c_str());
+            index = end + 1;
+            end = nums.find(' ', index);
+            break;
+        default:
+            goal.y = atoi(nums.substr(index).c_str());
+            break;
+        }
+    }
+}
+
+Milky_Way::~Milky_Way() {
+    if (planet) {
+        delete[] planet;
+    }
+}
 
 int main() {
 
     int case_num;
     int planet_count;
-    Milky_Way milky_way;
+    std::string input;
+    Milky_Way *milky_way;
 
     std::cin >> case_num;
     std::cin.ignore();
+
+    milky_way = new Milky_Way[case_num];
+
     for (int i = 0; i < case_num; i++) {
-        
+        getline(std::cin, input);
+        milky_way[i];
+
+        std::cin >> planet_count;
+        std::cin.ignore();
+
+        for (int i = 0; i < planet_count; i++) {
+            getline(std::cin, input);
+        }
     }
 
-    std::cin >> planet_count;
-    std::cin.ignore();
-    for (int i = 0; i < case_num; i++) {
-        
-    }
+    std::cout << input << std::endl;
+
+
+    std::cout << input << std::endl;
 
     return 0;
 }
