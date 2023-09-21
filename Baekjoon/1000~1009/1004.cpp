@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 struct Planet
 {
@@ -22,12 +23,14 @@ struct Point
 
 class Milky_Way {
     private:
+        int planet_count = 0;
         Planet *planet = nullptr;
         Point goal;
         Point start;
     public:
         void solve();
-        void set_planet();
+        void set_planet_count(int n);
+        void set_planet(std::string nums);
         void set_point(std::string nums);
         void show();
         ~Milky_Way();
@@ -36,37 +39,23 @@ class Milky_Way {
 void Milky_Way::solve() {
 
 }
+
+void Milky_Way::set_planet_count(int n) {
+    planet = new Planet[n];
+    planet_count = n;
+}
+
+
 void Milky_Way::set_planet(std::string nums) {
-
+    for 
 }
+
 void Milky_Way::set_point(std::string nums) {
-    int index = 0;
-    int end = nums.find(' ');
 
-    for (int i = 0; i < 4; i++){
-        switch (i)
-        {
-        case 0:
-            start.x = atoi(nums.substr(index, end - index).c_str());
-            index = end + 1;
-            end = nums.find(' ', index);
-            break;
-        case 1:
-            start.y = atoi(nums.substr(index, end - index).c_str());
-            index = end + 1;
-            end = nums.find(' ', index);
-            break;
-        case 2:
-            goal.x = atoi(nums.substr(index, end - index).c_str());
-            index = end + 1;
-            end = nums.find(' ', index);
-            break;
-        default:
-            goal.y = atoi(nums.substr(index).c_str());
-            break;
-        }
-    }
+    std::istringstream iss(nums);
+    iss >> start.x >> start.y >> goal.x >> goal.y;
 }
+
 void Milky_Way::show() {
     using std::cout;
 
@@ -99,9 +88,13 @@ int main() {
         std::cin >> planet_count;
         std::cin.ignore();
 
+        milky_way[i].set_planet_count(planet_count);
+
         for (int i = 0; i < planet_count; i++) {
             getline(std::cin, input);
+            milky_way[i].set_planet(input);
         }
     }
+    delete[] milky_way;
     return 0;
 }
