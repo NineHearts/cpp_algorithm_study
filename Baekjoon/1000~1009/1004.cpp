@@ -125,7 +125,6 @@ int main() {
 
     for (int i = 0; i < case_num; i++) {
         milky_ways[i].init();
-        milky_ways[i].show();
     }
 
     for (int i = 0; i < case_num; i++) {
