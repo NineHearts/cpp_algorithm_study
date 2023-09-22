@@ -3,8 +3,6 @@
 조규현의 좌표 $(x_1, y_1)$와 백승환의 좌표 $(x_2, y_2)$가 주어지고, 조규현이 계산한 류재명과의 거리 $r_1$과 백승환이 계산한 류재명과의 거리 $r_2$가 주어졌을 때, 류재명이 있을 수 있는 좌표의 수를 출력하는 프로그램을 작성하시오.*/
 
 #include <iostream>
-#include <string>
-#include <sstream>
 #include <cmath>
 
 /*
@@ -49,12 +47,10 @@ double distance(Turret& T1, Turret& T2) {
 }
 
 int main() {
-    using std::string;
     
     int cycle;
     int a[3], b[3];
 
-    string in;
     Turret *jo;
     Turret *ba;
 
@@ -65,13 +61,10 @@ int main() {
     ba = new Turret[cycle];     // 케이스의 갯수에 따라 동적 구조체 배열 선언
 
     for (int i = 0; i < cycle; i++) {
-        std::getline(std::cin, in);
-        std::istringstream iss(in);     // 띄어쓰기를 제거하기 위한 istringstream
-
         for (int j = 0; j < 3; j++)
-            iss >> a[j];
+            std::cin >> a[j];
         for (int k = 0; k < 3; k++)
-            iss >> b[k];
+            std::cin >> b[k];
 
         jo[i].init(a);
         ba[i].init(b);
