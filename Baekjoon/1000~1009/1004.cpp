@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <cmath>
 
 struct Planet
 {
@@ -34,13 +35,23 @@ class Milky_Way {
         void set_planet_count(int n);
         void set_planet(std::string nums);
         void set_point(std::string nums);
+        double distance(Planet &p1, Point& p2);
         ~Milky_Way();
 };
 
+double Milky_Way::distance(Planet &p1, Point& p2) {
+    return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+}
+
 void Milky_Way::solve() {
+    int count = 0;
     for (int i = 0; i < planet_count; ++i) {
-        planet[i];
+        bool s = planet[i].r > distance(planet[i], start);
+        bool g = planet[i].r > distance(planet[i], goal);
+        if (s != g)
+            count += 1;
     }
+    std::cout << count << std::endl;
 }
 
 void Milky_Way::init() {
@@ -115,6 +126,10 @@ int main() {
     for (int i = 0; i < case_num; i++) {
         milky_ways[i].init();
         milky_ways[i].show();
+    }
+
+    for (int i = 0; i < case_num; i++) {
+        milky_ways[i].solve();
     }
 
     delete[] milky_ways;
