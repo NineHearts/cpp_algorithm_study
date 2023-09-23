@@ -33,8 +33,6 @@ class Milky_Way {
         void init();
         void show() const;
         void set_planet_count(int n);
-        void set_planet(std::string nums);
-        void set_point(std::string nums);
         double distance(Planet &p1, Point& p2);
         ~Milky_Way();
 };
@@ -55,9 +53,10 @@ void Milky_Way::solve() {
 }
 
 void Milky_Way::init() {
-    std::string input;
-    getline(std::cin, input);
-    set_point(input);
+    using std::cin;
+
+    // set points
+    cin >> start.x >> start.y >> goal.x >> goal.y;
 
     std::cin >> planet_count;
     std::cin.ignore();
@@ -65,31 +64,18 @@ void Milky_Way::init() {
     set_planet_count(planet_count);
 
     for (int j = 0; j < planet_count; j++) {
-        getline(std::cin, input);
-        set_planet(input);
+        for (int i = 0; i < planet_count; ++i) {
+            if (planet[i].r == -1) {
+                cin >> planet[i].x >> planet[i].y >> planet[i].r;
+                break;
+            }
+    }
     }
 }
 
 void Milky_Way::set_planet_count(int n) {
     planet = new Planet[n];
     planet_count = n;
-}
-
-
-void Milky_Way::set_planet(std::string nums) {
-    for (int i = 0; i < planet_count; ++i) {
-        if (planet[i].r == -1) {
-            std::istringstream iss(nums);
-            iss >> planet[i].x >> planet[i].y >> planet[i].r;
-            break;
-        }
-    }
-}
-
-void Milky_Way::set_point(std::string nums) {
-
-    std::istringstream iss(nums);
-    iss >> start.x >> start.y >> goal.x >> goal.y;
 }
 
 void Milky_Way::show() const{
@@ -103,6 +89,7 @@ void Milky_Way::show() const{
     for (int i = 0; i < planet_count; ++i) {
         cout << planet[i].x << " " << planet[i].y << " " << planet[i].r << std::endl;
     }
+    cout << "----------end of milky way----------" << std::endl;;
 }
 
 Milky_Way::~Milky_Way() {
