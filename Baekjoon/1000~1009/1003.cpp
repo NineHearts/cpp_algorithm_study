@@ -23,15 +23,13 @@
 //     }
 // }
 
+
 // 피보나치 함수를 재귀 호출하여
-// 결과적으로 0을 출력하는 횟수는 
-// fibonacci(0)과 fibonacci(1)일때를 제외하고는
-// 피보나치 수열의 n-2번째 수와 같고,
-// 1을 출력하는 횟수는
-// 피보나치 수열의 n-1번째 수와 같으므로
+// 0을 출력하는 횟수는 fibonacci(0)과 fibonacci(1)일때를 제외하고는
+// 결과적으로 피보나치 수열의 n-2번째 수와 같고,
+// 1을 출력하는 횟수는 피보나치 수열의 n-1번째 수와 같으므로
 // fibonacci(0), fibonacci(1)일때는 각각 정해진 수를,
 // 나머지는 피보나치 수열의 값을 계산해 반환한다.
-
 
 #include <iostream>
 
@@ -65,11 +63,10 @@ int main() {
 
 void get_count(int n) {
     using std::cout;
+    
     int zero;
     int one;
 
-        zero = fibonacci(n, 0);
-        one = fibonacci(n, 1);
     if (n == 0) {
         zero = 1;
         one = 0;
@@ -84,12 +81,13 @@ void get_count(int n) {
     cout << zero << " " << one << std::endl;
 }
 
+// 피보나치 수열을 구하는 함수
 int fibonacci(int n, int num) {
 
     int sum = 1;
     int pre_1 = 0;
     int pre_2 = 0;
-    int i = num != 0 ? 1 : 2;
+    int i = num != 0 ? 1 : 2;       // 0이 출력되는 갯수를 구하는지 1이 출력되는 갯수인지에 따라 i의 값을 변경
     for (; i < n; ++i) {
         pre_1 = sum;
         sum += pre_2;
