@@ -19,7 +19,13 @@ class ACM{
 };
 
 int main() {
+
     int case_num;
+    std::cin >> case_num;
+
+    for (int i = 0; i < case_num; ++i){
+
+    }
 
     return 0;
 }
