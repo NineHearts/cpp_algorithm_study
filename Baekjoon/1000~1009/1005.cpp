@@ -21,10 +21,12 @@ class ACM{
 int main() {
 
     int case_num;
+    int rule_num, buliding_count;
+
     std::cin >> case_num;
 
     for (int i = 0; i < case_num; ++i){
-
+        std::cin >> rule_num >> buliding_count;
     }
 
     return 0;
