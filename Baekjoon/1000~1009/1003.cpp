@@ -62,8 +62,8 @@ int main() {
 }
 
 void get_count(int n) {
-    using std::cout;
     
+    using std::cout;
     int zero;
     int one;
 

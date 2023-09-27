@@ -3,8 +3,10 @@
 #include <algorithm>
 
 // 첫번째 솔루션
-// 각 자리에서 각각 왼쪽, 오른쪽 숫자에 맞추는데 필요한 시간을 저장한 배열을 만듬
-// 만든 배열에서 가장 시간이 적게 걸리는 숫자부터 차례대로 맞춰나감.
+// 각 자리에서 각각 왼쪽, 오른쪽 숫자에 맞추는데 필요한 시간을 저장한 배열을 만듦
+// 만든 배열에서 가장 시간이 적게 걸리는 인덱스의 숫자를 해당 걸리는 시간만큼 돌림,
+// 다시 각 자리에서 각각 왼쪽, 오른쪽 숫자에 맞추는데 필요한 시간을 계산 후 반복
+// 그리디 알고리즘
 // 실패!
 
 class Lock
@@ -20,42 +22,30 @@ class Lock
         short * _history;           // 사용x 바꾼 다이얼 번호 저장용
         short time_lapse;           // 지난 시간 저장
     public:
-        void init_lock(std::string n, std::string num);     // 클래스 생성 시 변수들 초기화 및 초기 설정
+        void init_lock();           // 변수들 입력 및 초기화
         void show_lock();
         void solve();
-        void get_difference();
+        void get_difference();      // 각 자릿수에서 인접한 다이얼과의 차이
         void get_correction(int range, int dir);
-        int *get_data();
+        int *get_data();                // 
         void turn_dial(int *data);      // new solution
         void turn_dial_(int *data);     // wrong solution
         ~Lock();
 };
 
-// 데이터가 문자열 형태로 전달되므로 정수형 변환이 필요하다.
-void Lock::init_lock(std::string n, std::string num)
+
+// 초기값 입력 및 초기화
+void Lock::init_lock()
 {
-    dial_n = atoi(n.substr(0, n.find(' ')).c_str());                // 다이얼 갯수의 수
-    range_m = atoi(n.substr(n.find(' ') + 1, n.length()).c_str());  // 다이얼 숫자의 범위
-    number = new short[dial_n]();                                   // 다이얼 숫자
-    forward = new short[num.length() - 1]();                        
-    reverse = new short[num.length() - 1]();
-    time_lapse = 0;
+    using std::cin;
+    cin >> dial_n >> range_m;
+    number = new short[dial_n]();
+    forward = new short[dial_n - 1]();                        
+    reverse = new short[dial_n - 1]();
 
-    int start = 0;              // 띄어쓰기로 나누어진 다이얼 숫자를 substr로 나누기 위한 시작 위치 변수
-    int end = num.find(' ');    // 띄어쓰기로 나누어진 다이얼 숫자를 substr로 나누기 위한 한 숫자의 끝 위치 변수
-
-    for (int i = 0; i < dial_n; i++) 
+    for (int i = 0; i < dial_n; ++i)
     {
-        if (i == (dial_n - 1))
-        {
-            number[i] = atoi(num.substr(start).c_str());
-        } 
-        else 
-        {
-            number[i] = atoi(num.substr(start, end - start).c_str());
-            start = end + 1;
-            end = num.find(' ', start);
-        }
+        cin >> number[i];
     }
 
     show_lock();
@@ -92,7 +82,9 @@ void Lock::solve()
     
 
 }
-void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차이, 
+
+// 각 자릿수에서 인접한 다이얼과의 차이, 
+void Lock::get_difference()
 {
     int i;
     int temp = 0;
@@ -102,25 +94,14 @@ void Lock::get_difference() // 각 자릿수에서 인접한 다이얼과의 차
         forward[i] = (number[i+1] >= temp) ? (number[i+1] - temp) : (number[i+1] - temp + range_m);
 
     }
-    for (i = dial_n - 1; i > 0; i--) // number의 맨 뒤에서 시작하므로 배열의 크기인 number length 에서 1을 뺴 배열의 마지막 원소 위치를 넣는다.
+    for (i = dial_n - 1; i > 0; i--) // number의 맨 마지막 인덱스에서 시작하므로 배열의 크기인 number length 에서 1을 뺴 배열의 마지막 원소 위치를 넣는다.
     {
         temp = number[i];
         reverse[i-1] = (number[i-1] >= temp) ? (number[i-1] - temp) : (number[i-1] - temp) + range_m;
 
     }
-
-    // print array print array print array print array print array print array print array print array print array print array 
-    // print array print array print array print array print array print array print array print array print array print array 
-    std::cout << "forward array : ";
-    for (int i = 0; i < dial_n - 1; i++)
-        std::cout << forward[i] << "\t";
-    
-    std::cout << std::endl;
-    std::cout << "reverse array : ";
-    for (int i = 0; i < dial_n - 1; i++)
-        std::cout << reverse[i] << "\t";
-    std::cout << std::endl;
 }
+
 
 void Lock::get_correction(int idx, int dir)
 //  idx : 차이가 가장 적은 값과 인접한 위치와 동일한 값을 가지는 마지막 다이얼의 위치, dir : 좌에서 우인지, 우에서 좌인지 방향
@@ -132,7 +113,7 @@ void Lock::get_correction(int idx, int dir)
     int value = 0; // 다이얼을 변경할 값
     int dif_1 = 0, dif_2 = 0;       // dif_1 data[ref]와 현재 비교할자다이얼 숫자의 차이
 
-    if (dir)      // reverse * fix it *
+    if (dir)      // reverse
     {
         for (i = (idx); i < dial_n; i++)
         {
@@ -157,7 +138,6 @@ void Lock::get_correction(int idx, int dir)
                     range = i;
                 }
                 else{
-                    // 이거 바꾸기
                     dif_2 = number[i-1] - number[i] > 0 ? number[i-1] - number[i] : number[i-1] - number[i] + range_m;
                 }
                 std::cout << "dif_1 : " << dif_1 << "\tdif_2 : " << dif_2 << std::endl;
@@ -326,10 +306,7 @@ int main()
 
     Lock lock;
 
-    getline(cin, n);
-    getline(cin, m);
-
-    lock.init_lock(n, m);
+    lock.init_lock();
     lock.solve();
 
     return 0;

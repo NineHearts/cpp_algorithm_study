@@ -14,12 +14,13 @@
 
 struct Build
 {
-    /* data */
+    int index;
 };
 
 
 // 건물들의 건설 규칙, 건물의 데이터를 저장할 클래스
 class ACM{
+
     private:
     public:
 };
