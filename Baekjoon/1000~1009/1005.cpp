@@ -20,7 +20,6 @@ struct Build
 
 // 건물들의 건설 규칙, 건물의 데이터를 저장할 클래스
 class ACM{
-
     private:
     public:
 };
@@ -34,6 +33,10 @@ int main() {
 
     for (int i = 0; i < case_num; ++i){
         std::cin >> rule_num >> buliding_count;
+    }
+
+    for (int i = 0; i < rule_num; ++i){
+        
     }
 
     return 0;
