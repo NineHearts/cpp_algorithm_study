@@ -15,6 +15,7 @@
 struct Build
 {
     int index;
+    int time;
 };
 
 
@@ -35,7 +36,7 @@ int main() {
         std::cin >> rule_num >> buliding_count;
     }
 
-    for (int i = 0; i < rule_num; ++i){
+    for (int i = 0; i < buliding_count; ++i){
         
     }
 
