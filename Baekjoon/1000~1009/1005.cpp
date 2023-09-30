@@ -12,33 +12,41 @@
 
 #include <iostream>
 
+// 건물 번호와 건설 시간에 걸리는 정보를 저장할 구조체
 struct Build
 {
     int index;
     int time;
 };
 
-
 // 건물들의 건설 규칙, 건물의 데이터를 저장할 클래스
-class ACM{
+class ACM
+{
     private:
+        Build building;
+        
     public:
 };
 
-int main() {
-
+int main()
+{
     int case_num;
-    int rule_num, buliding_count;
+    int rule_count, buliding_count;
+
+    ACM *acm;
 
     std::cin >> case_num;
 
-    for (int i = 0; i < case_num; ++i){
-        std::cin >> rule_num >> buliding_count;
+    for (int i = 0; i < case_num; ++i)
+    {
+        std::cin >> buliding_count >> rule_count;
+
+        for (int i = 0; i < buliding_count; ++i)
+        {
+            
+        }
     }
 
-    for (int i = 0; i < buliding_count; ++i){
-        
-    }
-
+    delete[] acm;
     return 0;
 }
