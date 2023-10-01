@@ -23,15 +23,22 @@ struct Build
 class ACM
 {
     private:
-        Build building;
+        Build *building;
         
     public:
+        void set_building(int count);
 };
+
+void ACM::set_building(int count)
+{
+    building = new Build[count];
+}
 
 int main()
 {
     int case_num;
     int rule_count, buliding_count;
+    int time;
 
     ACM *acm;
 
@@ -40,9 +47,11 @@ int main()
     for (int i = 0; i < case_num; ++i)
     {
         std::cin >> buliding_count >> rule_count;
+        acm.set_building(buliding_count);
 
         for (int i = 0; i < buliding_count; ++i)
         {
+            std::cin >> time;
             
         }
     }
