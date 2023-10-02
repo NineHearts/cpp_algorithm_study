@@ -26,12 +26,18 @@ class ACM
         Build *building;
         
     public:
-        void set_building(int count);
+        void set_building_count(int count);
+        void set_building(int index, int time);
 };
 
-void ACM::set_building(int count)
+void ACM::set_building_count(int count)
 {
     building = new Build[count];
+}
+
+void ACM::set_building(int index, int time)
+{
+
 }
 
 int main()
@@ -43,11 +49,12 @@ int main()
     ACM *acm;
 
     std::cin >> case_num;
+    acm = new ACM[case_num];
 
     for (int i = 0; i < case_num; ++i)
     {
         std::cin >> buliding_count >> rule_count;
-        acm.set_building(buliding_count);
+        acm[i].set_building_count(buliding_count);
 
         for (int i = 0; i < buliding_count; ++i)
         {
