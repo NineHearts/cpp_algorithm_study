@@ -37,7 +37,7 @@ void ACM::set_building_count(int count)
 
 void ACM::set_building(int index, int time)
 {
-
+    building[index].time = time;
 }
 
 int main()
