@@ -15,7 +15,6 @@
 // 건물 번호와 건설 시간에 걸리는 정보를 저장할 구조체
 struct Build
 {
-    int index;
     int time;
 };
 
@@ -35,9 +34,9 @@ void ACM::set_building_count(int count)
     building = new Build[count];
 }
 
-void ACM::set_building(int index, int time)
+void ACM::set_building(int index, int build_time)
 {
-    building[index].time = time;
+
 }
 
 int main()
