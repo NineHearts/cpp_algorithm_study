@@ -47,17 +47,20 @@ int main()
 
     ACM *acm;
 
+    // 첫번째 줄에는 테스트 케이스의 갯수 case_num
     std::cin >> case_num;
     acm = new ACM[case_num];
 
     for (int i = 0; i < case_num; ++i)
     {
+        // 
         std::cin >> buliding_count >> rule_count;
         acm[i].set_building_count(buliding_count);
 
-        for (int i = 0; i < buliding_count; ++i)
+        for (int j = 0; j < buliding_count; ++j)
         {
             std::cin >> time;
+            acm[i].set_building(j, time);
             
         }
     }
