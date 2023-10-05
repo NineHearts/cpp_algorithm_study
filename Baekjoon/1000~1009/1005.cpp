@@ -63,6 +63,11 @@ int main()
             acm[i].set_building(j, time);
             
         }
+
+        for (int j = 0; j < rule_count; ++rule_count)
+        {
+            
+        }
     }
 
     delete[] acm;
