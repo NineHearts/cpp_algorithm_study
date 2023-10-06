@@ -18,21 +18,14 @@
 // 최종 목표 건물
 
 
-
 #include <iostream>
-
-// 건물 번호와 건설 시간에 걸리는 정보를 저장할 구조체
-struct Build
-{
-    int time = -1;          // 건설 시간
-    int priored = -1;       // 선행 건물 인덱스
-};
 
 // 건물의 데이터 및 함수들을 저장할 클래스
 class ACM
 {
     private:
-        Build *building;
+        int *rule = nullptr;
+        int *building = nullptr;
         
     public:
         void set_building_count(int count);
@@ -41,7 +34,7 @@ class ACM
 
 void ACM::set_building_count(int count)
 {
-    building = new Build[count];
+    building = new int[count];
 }
 
 void ACM::set_building(int index, int build_time)
