@@ -10,15 +10,25 @@
 프로게이머 최백준은 애인과의 데이트 비용을 마련하기 위해 서강대학교배 ACM크래프트 대회에 참가했다! 최백준은 화려한 컨트롤 실력을 가지고 있기 때문에 모든 경기에서 특정 건물만 짓는다면 무조건 게임에서 이길 수 있다. 그러나 매 게임마다 특정건물을 짓기 위한 순서가 달라지므로 최백준은 좌절하고 있었다. 백준이를 위해 특정건물을 가장 빨리 지을 때까지 걸리는 최소시간을 알아내는 프로그램을 작성해주자.
 */
 
+
+// 들어오는 값
+// 케이스 갯수
+// 건물의 갯수와 건물순서 규칙의 갯수
+// 각 건설에 걸리는 시간
+// 최종 목표 건물
+
+
+
 #include <iostream>
 
 // 건물 번호와 건설 시간에 걸리는 정보를 저장할 구조체
 struct Build
 {
-    int time;
+    int time = -1;          // 건설 시간
+    int priored = -1;       // 선행 건물 인덱스
 };
 
-// 건물들의 건설 규칙, 건물의 데이터를 저장할 클래스
+// 건물의 데이터 및 함수들을 저장할 클래스
 class ACM
 {
     private:
@@ -42,7 +52,7 @@ void ACM::set_building(int index, int build_time)
 int main()
 {
     int case_num;
-    int rule_count, buliding_count;
+    int order_count, buliding_count;
     int time;
 
     ACM *acm;
@@ -54,7 +64,7 @@ int main()
     for (int i = 0; i < case_num; ++i)
     {
         // 
-        std::cin >> buliding_count >> rule_count;
+        std::cin >> buliding_count >> order_count;
         acm[i].set_building_count(buliding_count);
 
         for (int j = 0; j < buliding_count; ++j)
@@ -64,9 +74,9 @@ int main()
             
         }
 
-        for (int j = 0; j < rule_count; ++rule_count)
+        for (int j = 0; j < order_count; ++order_count)
         {
-            
+            std::cin >> acm
         }
     }
 
