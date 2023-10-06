@@ -30,6 +30,7 @@ class ACM
     public:
         void set_building_count(int count);
         void set_building(int index, int time);
+        ~ACM();
 };
 
 void ACM::set_building_count(int count)
@@ -39,7 +40,19 @@ void ACM::set_building_count(int count)
 
 void ACM::set_building(int index, int build_time)
 {
-    building[index].time = build_time;
+    building[index] = build_time;
+}
+
+ACM::~ACM()
+{
+    if (rule != nullptr)
+    {
+        delete[] rule;
+    }
+    if (building != nullptr)
+    {
+        delete[] building;
+    }
 }
 
 int main()
@@ -69,7 +82,7 @@ int main()
 
         for (int j = 0; j < order_count; ++order_count)
         {
-            std::cin >> acm
+            std::cin >> acm.
         }
     }
 
