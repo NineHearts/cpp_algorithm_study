@@ -30,6 +30,7 @@ class ACM
     public:
         void set_building_count(int count);
         void set_building(int index, int time);
+        void set_rule_count(int count);
         ~ACM();
 };
 
@@ -41,6 +42,11 @@ void ACM::set_building_count(int count)
 void ACM::set_building(int index, int build_time)
 {
     building[index] = build_time;
+}
+
+void ACM::set_rule_count(int count)
+{
+    
 }
 
 ACM::~ACM()
