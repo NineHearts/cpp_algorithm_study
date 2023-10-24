@@ -64,7 +64,7 @@ ACM::~ACM()
 int main()
 {
     int case_num;
-    int order_count, buliding_count;
+    int rule_count, buliding_count;
     int time;
 
     ACM *acm;
@@ -76,8 +76,9 @@ int main()
     for (int i = 0; i < case_num; ++i)
     {
         // 
-        std::cin >> buliding_count >> order_count;
+        std::cin >> buliding_count >> rule_count;
         acm[i].set_building_count(buliding_count);
+        acm[i].set_rule_count(rule_count);
 
         for (int j = 0; j < buliding_count; ++j)
         {
@@ -86,9 +87,11 @@ int main()
             
         }
 
-        for (int j = 0; j < order_count; ++order_count)
+        
+
+        for (int j = 0; j < rule_count; ++rule_count)
         {
-            std::cin >> acm.
+            
         }
     }
 
