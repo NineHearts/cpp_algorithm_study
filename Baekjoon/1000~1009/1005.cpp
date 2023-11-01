@@ -87,8 +87,6 @@ int main()
             
         }
 
-        
-
         for (int j = 0; j < rule_count; ++rule_count)
         {
             
