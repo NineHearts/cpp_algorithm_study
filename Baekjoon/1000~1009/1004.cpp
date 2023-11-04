@@ -33,7 +33,8 @@ struct Point
     int y;
 };
 
-class Milky_Way {
+class Milky_Way 
+{
     private:
         int planet_count = 0;
         Planet *planet = nullptr;
@@ -49,11 +50,13 @@ class Milky_Way {
 };
 
 // 거리를 구하는 함수
-double Milky_Way::distance(Planet &p1, Point& p2) {
+double Milky_Way::distance(Planet &p1, Point& p2) 
+{
     return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
 }
 
-void Milky_Way::solve() {
+void Milky_Way::solve() 
+{
     int count = 0;
     for (int i = 0; i < planet_count; ++i) {
         bool s = planet[i].r > distance(planet[i], start);
@@ -65,7 +68,8 @@ void Milky_Way::solve() {
 }
 
 // 값을 받아 변수들을 초기화하는 함수
-void Milky_Way::set() {
+void Milky_Way::set() 
+{
     using std::cin;
 
     // set points
@@ -87,12 +91,14 @@ void Milky_Way::set() {
 }
 
 // 행성의 갯수를 받아와 planet의 크기를 동적으로 할당한다.
-void Milky_Way::set_planet_count(int n) {
+void Milky_Way::set_planet_count(int n)
+{
     planet = new Planet[n];
     planet_count = n;
 }
 
-void Milky_Way::show() const{
+void Milky_Way::show() const
+{
     using std::cout;
 
     cout << "----------start point----------\n"; 
@@ -106,13 +112,15 @@ void Milky_Way::show() const{
     cout << "----------end of milky way----------" << std::endl;;
 }
 
-Milky_Way::~Milky_Way() {
+Milky_Way::~Milky_Way() 
+{
     if (planet) {
         delete[] planet;
     }
 }
 
-int main() {
+int main() 
+{
 
     int case_num;
     int planet_count;
